@@ -13,7 +13,7 @@ A Vercel serverless webhook that automatically copies the `SMS` field to `MOBILE
 ```
 brevo-sync/
 ├── api/
-│   ├── index.js          ← Health check (GET /)
+│   ├── index.js          ← Health check (GET /api)
 │   └── sync-mobile.js    ← Main webhook handler (POST /api/sync-mobile)
 ├── .env.example
 ├── .gitignore

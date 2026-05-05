@@ -2,7 +2,7 @@
   "name": "brevo-sync",
   "version": "1.0.0",
   "description": "Brevo webhook to sync SMS field to MOBILEPHONE field",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
     "dev": "vercel dev",
     "deploy": "vercel --prod"

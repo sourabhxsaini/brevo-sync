@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 module.exports = async function handler(req, res) {
-  // Only allow POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -23,7 +22,6 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ message: 'No SMS value found, skipping' });
     }
 
-    // Copy SMS value into all 3 confirmed Brevo phone fields
     await axios.put(
       `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
       {
@@ -41,7 +39,7 @@ module.exports = async function handler(req, res) {
       }
     );
 
-    console.log(`[Brevo Webhook] ✅ Updated MOBILEPHONENUMBER + WHATSAPP + PHONENUMBER for ${email} → ${smsValue}`);
+    console.log(`[Brevo Webhook] Updated MOBILEPHONENUMBER + WHATSAPP + PHONENUMBER for ${email} -> ${smsValue}`);
 
     return res.status(200).json({
       success: true,
@@ -52,10 +50,9 @@ module.exports = async function handler(req, res) {
         PHONENUMBER: smsValue
       }
     });
-
   } catch (err) {
     const errorDetail = err.response?.data || err.message;
-    console.error('[Brevo Webhook] ❌ Error:', errorDetail);
+    console.error('[Brevo Webhook] Error:', errorDetail);
 
     return res.status(500).json({
       error: 'Failed to update contact',
